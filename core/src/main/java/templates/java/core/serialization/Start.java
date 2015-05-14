@@ -7,6 +7,7 @@ import java.io.*;
 /**
  * Author: Gennadii Cherniaiev
  * Date: 5/14/2015
+ * http://www.javacodegeeks.com/2013/03/serialization-in-java.html
  */
 public class Start {
 
