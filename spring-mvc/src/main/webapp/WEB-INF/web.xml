@@ -1,0 +1,41 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <!-- Root WebApplicationContext - defines the beans for the "root webapp context", i.e. the context associated with the webapp.
+         It is generally used to contain beans that are shared between all servlets in a webapp
+         WebApplicationContext is an extension of the plain ApplicationContext that has some extra features necessary for web applications:
+             * it is capable of resolving themes
+             * it knows which Servlet it is associated with (by having a link to the ServletContext)
+             * The WebApplicationContext is bound in the ServletContext, and by using static methods on the RequestContextUtils class you can always look up the WebApplicationContext
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/root-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Each DispatcherServlet has its own WebApplicationContext, which inherits all the beans already defined in the root WebApplicationContext.
+         Beans in [servlet-name]-servlet.xml can reference beans in root-context.xml, but not vice versa.
+         Upon initialization of a DispatcherServlet, Spring MVC looks for a file named [servlet-name]-servlet.xml in the WEB-INF directory of your web application
+         and creates the beans defined there, overriding the definitions of any beans defined with the same name in the global scope. -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <!--<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>path/to/location</param-value>
+        </init-param>-->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
