@@ -13,12 +13,14 @@
         <spring.version>4.1.7.RELEASE</spring.version>
         <logback.version>1.1.3</logback.version>
         <jcloverslf4j.version>1.7.12</jcloverslf4j.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
     </properties>
 
     <modules>
         <module>core</module>
         <module>spring-mvc</module>
         <module>spring-core</module>
+        <module>tomcat</module>
     </modules>
 
     <dependencyManagement>
@@ -55,6 +57,11 @@
                 <artifactId>jstl</artifactId>
                 <version>1.2</version>
             </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+            </dependency>
 
             <dependency>
                 <groupId>commons-logging</groupId>
@@ -72,12 +79,10 @@
                 <version>${jcloverslf4j.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>3.8.1</version>
-                <scope>test</scope>
+                <version>4.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
