@@ -17,7 +17,12 @@ import java.util.Properties;
 @Configuration
 // enable lookup for @Transactional methods
 // resides in [spring-tx]
-@EnableTransactionManagement
+// - proxyTargetClass = true - using class-based proxies (CglibAopProxy), @Transactional from parent interfaces WILL NOT WORK
+// - proxyTargetClass = false - JdkDynamicAopProxy
+// - mode = AdviceMode.ASPECTJ - if self-invocations to be wrapped with transactions as well.In this case, there will not be a proxy in the first place;
+//              instead, the target class will be weaved (that is, its byte code will be modified)
+//              AspectJ weaving requires spring-aspects.jar in the classpath as well as load-time weaving (or compile-time weaving) enabled
+@EnableTransactionManagement(proxyTargetClass = false)
 @ComponentScan(basePackages = "com.gc.java.spring")
 public class Config {
 
